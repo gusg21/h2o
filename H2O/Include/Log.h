@@ -2,7 +2,7 @@
 // Created by Angus Goucher on 10/13/2024.
 //
 
-#include "String.h"
+#include "H2OString.h"
 
 namespace H2O {
     namespace Log {

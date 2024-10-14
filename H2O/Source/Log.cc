@@ -7,13 +7,13 @@
 #include <stdio.h>
 
 void H2O::Log::Info(const H2O::String& Text) {
-    printf("INFO: %s", Text.Data);
+    printf("INFO: %s\n", Text.Data);
 }
 
 void H2O::Log::Warning(const H2O::String& Text) {
-    printf("WARN: %s", Text.Data);
+    printf("WARN: %s\n", Text.Data);
 }
 
 void H2O::Log::Error(const H2O::String& Text) {
-    printf("ERROR: %s", Text.Data);
+    printf("ERROR: %s\n", Text.Data);
 }

@@ -21,7 +21,7 @@ namespace H2O {
          * Copy a raw byte string into this string.
          * @param CStr The bytes to copy from.
          */
-        explicit String(const CHAR* CStr);
+        String(const CHAR* CStr);
 
         /**
          * Allocates an empty string with a given capacity.
@@ -30,11 +30,44 @@ namespace H2O {
         explicit String(U32 Capacity);
 
         /**
+         * Copy constructor.
+         */
+        String(const String& Other);
+
+        /**
          * Clean up the string.
          */
         ~String();
 
-        void Resize(U32 NewCapacity);
+        /**
+         * Move operator.
+         */
+//        String& operator=(String&& Other) noexcept;
+
+        /**
+         * Concatenation operator.
+         */
+        String& operator+=(const String& Other) noexcept;
+
+        /**
+         * Increases the capacity - does not affect size.
+         * @param NewCapacity The new capacity.
+         */
+        void Reserve(U32 NewCapacity);
+
+        /**
+         * Populate this string with the text representing a number.
+         * @param Number
+         * @return
+         */
+        void FromNumber(I32 Number);
+
+        /**
+         * Create a string representing a given integer.
+         * @param Number The integer to represent.
+         * @return The string.
+         */
+        static String CreateFromNumber(I32 Number);
 
         /**
          * Calculate the number of bytes up including the null terminator.
@@ -42,8 +75,6 @@ namespace H2O {
          * @return The number of bytes.
          */
         static U32 MeasureCStrLength(const CHAR* CStr);
-
-        static String FromNumber(U32 Number);
 
         /**
          * The raw bytes.
@@ -61,7 +92,11 @@ namespace H2O {
         U32 Capacity = 0;
     };
 
-    String operator+(const String& Str1, const String& Str2) {
-
-    }
+//    /**
+//     * An interface that defines a conversion to a string.
+//     */
+//    class Stringable {
+//    public:
+//        virtual void ToString() = 0;
+//    };
 }

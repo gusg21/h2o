@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "String.h"
+#include "H2OString.h"
 #include "BaseTypes.h"
 #include "Object.h"
 

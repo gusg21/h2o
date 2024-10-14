@@ -6,6 +6,8 @@
 
 #include "BaseTypes.h"
 #include "Memory.h"
+#include "Object.h"
+#include "Array.generated.h"
 
 #define H2O_ARRAY_DEFAULT_CAPACITY 2
 
@@ -14,7 +16,9 @@ namespace H2O {
      * A dynamic array.
      */
     template <typename ItemType>
-    class Array {
+    class Array : public Object {
+        DECLARE_CLASS(Array, Object, 0);
+
     public:
         Array();
         explicit Array(U32 Capacity);
@@ -26,6 +30,24 @@ namespace H2O {
          * @param Item The item to add.
          */
         void Add(ItemType Item);
+
+        /**
+         * Gets a pointer to the first element of the array.
+         * @return A pointer to the first element.
+         */
+        ItemType* GetFirst() const;
+
+        /**
+         * Gets a pointer to the last element of the array.
+         * @return A pointer to the last element.
+         */
+        ItemType* GetLast() const;
+
+        /**
+         * Converts the array to a string.
+         * @return A string representing the array.
+         */
+        String ToString();
 
         /**
          * The raw data itself.
@@ -68,20 +90,44 @@ namespace H2O {
         Capacity = NewCapacity;
         Data = static_cast<ItemType*>(H2O::Memory::Allocate(Capacity * sizeof(ItemType)));
 
-        H2O::Memory::Copy(Data, OldCapacity, OldData);
+        H2O::Memory::Copy(Data, OldCapacity * sizeof(ItemType), OldData);
 
         delete OldData;
     }
 
     template<typename ItemType>
     void Array<ItemType>::Add(ItemType Item) {
-        // TODO: Reserve more than enough to make one-after-another additions faster?
-        Reserve(Size + 1);
+        if (Size + 1 > Capacity)
+            Reserve(Capacity * 2);
 
         // Add to the array
         Data[Size] = Item;
         Size++;
+    }
 
-//        static_assert(Size < Capacity, "Array size is too big for the capacity!");
+    template<typename ItemType>
+    ItemType* Array<ItemType>::GetFirst() const {
+        return Data;
+    }
+
+    template<typename ItemType>
+    ItemType* Array<ItemType>::GetLast() const {
+        return Data + Size - 1;
+    }
+
+    template<typename ItemType>
+    String Array<ItemType>::ToString() {
+        String Str {};
+        Str += "[S: ";
+        Str += String::CreateFromNumber(Size);
+        Str += ", \tC: ";
+        Str += String::CreateFromNumber(Capacity);
+        Str += "] ";
+
+        for (U32 i = 0; i < Size; i++) {
+            Str += String::CreateFromNumber(Data[i]);
+            Str += ", ";
+        }
+        return Str;
     }
 }
