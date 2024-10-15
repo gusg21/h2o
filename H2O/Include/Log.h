@@ -2,6 +2,8 @@
 // Created by Angus Goucher on 10/13/2024.
 //
 
+#pragma once
+
 #include "H2OString.h"
 
 namespace H2O {

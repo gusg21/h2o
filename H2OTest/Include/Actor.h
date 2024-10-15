@@ -12,7 +12,7 @@ namespace H2O {
 namespace Test {
 
     class Actor : H2O::Object {
-        DECLARE_CLASS(Actor, H2O::Object, 0);
+        DECLARE_CLASS();
 
     public:
         String Name {};

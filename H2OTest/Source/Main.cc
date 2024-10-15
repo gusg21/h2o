@@ -3,7 +3,6 @@
 //
 
 #include "BaseTypes.h"
-#include "Class.h"
 #include "H2OString.h"
 #include "Log.h"
 #include "Array.h"
@@ -23,6 +22,8 @@ I16 main(I16 ArgumentCount, CHAR* Arguments[]) {
         H2O::Log::Info(H2O::String::CreateFromNumber(*Numbers.GetFirst()));
         H2O::Log::Info(H2O::String::CreateFromNumber(*Numbers.GetLast()));
     }
+
+    H2O::Log::Info(H2O::String::GetClass()->ToString());
 
     return 0;
 }

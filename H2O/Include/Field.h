@@ -11,10 +11,33 @@ namespace H2O {
 
     class Field {
     public:
+        Field() = default;
+        Field(Class* Type, const String& Name, void* Offset);
+
+        /**
+         * Get a string describing this field.
+         * @return The string.
+         */
         String ToString() const;
 
-        Class* Type;
-        String Name;
-        void* Offset;
+        /**
+         * The next field in the linked list.
+         */
+        Field* NextField = nullptr;
+
+        /**
+         * The class representing the type of this field.
+         */
+        Class* Type = nullptr;
+
+        /**
+         * The field's name.
+         */
+        String Name = "Unknown";
+
+        /**
+         * The offset of this field within the class containing it.
+         */
+        void* Offset = nullptr;
     };
 }

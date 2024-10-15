@@ -7,7 +7,7 @@
 #include "BaseTypes.h"
 #include "Memory.h"
 #include "Object.h"
-#include "Array.generated.h"
+#include "Class.h"
 
 #define H2O_ARRAY_DEFAULT_CAPACITY 2
 
@@ -16,9 +16,7 @@ namespace H2O {
      * A dynamic array.
      */
     template <typename ItemType>
-    class Array : public Object {
-        DECLARE_CLASS(Array, Object, 0);
-
+    class Array {
     public:
         Array();
         explicit Array(U32 Capacity);

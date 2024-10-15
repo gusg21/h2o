@@ -5,12 +5,16 @@
 #pragma once
 
 #include "BaseTypes.h"
+#include "BaseMacros.h"
+#include "Object.h"
 
 namespace H2O {
     /**
      * A text string.
      */
-    class String {
+    class String : public H2O::Object {
+        DECLARE_CLASS();
+
     public:
         /**
          * Allocate an empty string.
@@ -61,6 +65,13 @@ namespace H2O {
          * @return
          */
         void FromNumber(I32 Number);
+
+        /**
+         * Is this string a byte for byte equal of another string?
+         * @param Other The string to compare against.
+         * @return Yay or nay.
+         */
+        bool ExactlyEquals(const String& Other) const;
 
         /**
          * Create a string representing a given integer.

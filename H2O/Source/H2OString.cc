@@ -63,6 +63,20 @@ void H2O::String::Reserve(U32 NewCapacity) {
     delete OldData;
 }
 
+bool H2O::String::ExactlyEquals(const H2O::String& Other) const {
+    if (Size != Other.Size) {
+        return false;
+    }
+
+    for (U32 i = 0; i < Size; ++i) {
+        if (Data[i] != Other.Data[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 U32 H2O::String::MeasureCStrLength(const CHAR* CStr) {
     const CHAR* Char = CStr;
     U32 Count = 0;
@@ -143,3 +157,4 @@ H2O::String& H2O::String::operator+=(const H2O::String& Other) noexcept {
 
     return *this;
 }
+

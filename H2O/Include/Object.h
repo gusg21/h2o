@@ -4,12 +4,9 @@
 
 #pragma once
 
-#include "Class.h"
-
 namespace H2O {
 
     class Object {
-
     };
 
 }

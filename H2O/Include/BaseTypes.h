@@ -14,6 +14,7 @@ typedef long int I32;
 typedef unsigned long long U64;
 typedef long long I64;
 
+typedef U64 INTPTR;
 typedef I8 CHAR;
 // TODO: Determine how multi-byte strings should be represented
 // typedef I8 WIDECHAR;
